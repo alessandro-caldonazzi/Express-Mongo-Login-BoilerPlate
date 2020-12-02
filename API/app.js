@@ -8,6 +8,9 @@ var indexRouter = require('./src/routes/index');
 var usersRouter = require('./src/routes/users');
 var authRouter = require('./src/routes/auth');
 
+const mongoose = require('mongoose');
+
+mongoose.connect(`mongodb://ale:${process.env.MONGO_PASSWORD}@192.168.1.115:27017/Platform?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var app = express();
 
