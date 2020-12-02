@@ -18,6 +18,15 @@
           {
             "group": "Parameter",
             "type": "String",
+            "size": "3..128",
+            "optional": false,
+            "field": "username",
+            "description": "<p>User's nikname</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "size": "6..128",
             "optional": false,
             "field": "email",
             "description": "<p>User's email</p>"
@@ -55,56 +64,7 @@
             "type": "String",
             "optional": false,
             "field": "token.refreshToken",
-            "description": "<p>Token to get a new accessToken after expiration time</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "Number",
-            "optional": false,
-            "field": "token.expiresIn",
-            "description": "<p>Access Token's expiration time in miliseconds</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "String",
-            "optional": false,
-            "field": "token.timezone",
-            "description": "<p>The server's Timezone</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "String",
-            "optional": false,
-            "field": "user.id",
-            "description": "<p>User's id</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "String",
-            "optional": false,
-            "field": "user.name",
-            "description": "<p>User's name</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "String",
-            "optional": false,
-            "field": "user.email",
-            "description": "<p>User's email</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "String",
-            "optional": false,
-            "field": "user.role",
-            "description": "<p>User's role</p>"
-          },
-          {
-            "group": "Created 201",
-            "type": "Date",
-            "optional": false,
-            "field": "user.createdAt",
-            "description": "<p>Timestamp</p>"
+            "description": "<p>Token to get a new accessToken</p>"
           }
         ]
       }
