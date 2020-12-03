@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./src/routes/index');
 var usersRouter = require('./src/routes/users');
 var authRouter = require('./src/routes/auth');
+var env = process.env.NODE_ENV || 'developent';
 
 const mongoose = require('mongoose');
 
@@ -35,14 +36,20 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use((err, req, res, next) => {
+    const response = {
+        code: err.status,
+        message: err.message || httpStatus[err.status],
+        errors: err.errors,
+        stack: err.stack,
+    };
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+    if (env !== 'development') {
+        delete response.stack;
+    }
+
+    res.status(err.status);
+    res.json(response);
 });
 
 module.exports = app;
