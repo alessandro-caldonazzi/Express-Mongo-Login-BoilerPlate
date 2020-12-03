@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const APIError = require('../utils/apiError');
 const mongoose = require('mongoose');
 exports.register = async(req, res, next) => {
     let { username, password, email } = req.body;
@@ -9,9 +10,7 @@ exports.register = async(req, res, next) => {
         email
     });
 
-
     user.save().then(result => {
-        console.log(result);
         res.json({ "ok": true, "data": user });
     }).catch(err => console.log(err));
 };
