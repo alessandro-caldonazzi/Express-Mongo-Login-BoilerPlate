@@ -39,4 +39,21 @@ router.post('/register', controller.register);
  */
 router.post('/login', controller.login);
 
+/**
+ * @api {post} auth/refresh Refresh
+ * @apiDescription Calculate new JWT from refresh token
+ * @apiVersion 1.0.0
+ * @apiName Refresh
+ * @apiGroup Auth
+ * @apiPermission public
+ *
+ * @apiParam  {String{3..}}          refreshToken     refresh token
+ *
+ * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
+ * @apiSuccess (Created 201) {String}  token.refreshToken  Token to get a new accessToken
+ *
+ * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
+ */
+router.post('/refresh', controller.refresh);
+
 module.exports = router;
