@@ -38,3 +38,11 @@ exports.login = async(req, res, next) => {
         next(err);
     }
 };
+
+exports.refresh = async(req, res, next) => {
+    try {
+
+    } catch (err) {
+        next(err);
+    }
+};
