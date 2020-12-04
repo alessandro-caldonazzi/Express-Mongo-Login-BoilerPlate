@@ -50,7 +50,6 @@ router.post('/login', controller.login);
  * @apiParam  {String{3..}}          refreshToken     refresh token
  *
  * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
- * @apiSuccess (Created 201) {String}  token.refreshToken  Token to get a new accessToken
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
