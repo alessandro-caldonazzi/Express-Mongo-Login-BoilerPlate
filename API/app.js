@@ -13,6 +13,9 @@ const mongoose = require('mongoose');
 
 mongoose.connect(`mongodb://ale:${process.env.MONGO_PASSWORD}@192.168.1.115:27017/Platform?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, });
 
+const session = require('session-jwt');
+session.settings(process.env.JWT_SECRET);
+
 var app = express();
 
 // view engine setup
