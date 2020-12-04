@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const httpStatus = require('http-status');
 
 var indexRouter = require('./src/routes/index');
 var usersRouter = require('./src/routes/users');
@@ -41,8 +42,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use((err, req, res, next) => {
     const response = {
-        code: err.status,
-        message: err.message || httpStatus[err.status],
+        code: err.status || 400,
+        message: err.message || httpStatus[response.code],
         errors: err.errors,
         stack: err.stack,
     };
@@ -51,7 +52,7 @@ app.use((err, req, res, next) => {
         delete response.stack;
     }
 
-    res.status(err.status);
+    res.status(response.code);
     res.json(response);
 });
 
