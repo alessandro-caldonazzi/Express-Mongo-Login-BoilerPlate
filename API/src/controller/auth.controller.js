@@ -1,6 +1,8 @@
 const User = require('../models/user.model');
 const APIError = require('../utils/apiError');
 const mongoose = require('mongoose');
+const session = require('session-jwt');
+
 exports.register = async(req, res, next) => {
     try {
         let { username, password, email } = req.body;
@@ -11,8 +13,10 @@ exports.register = async(req, res, next) => {
             email
         });
 
-        let a = await user.save();
-        console.log(a);
+        let saved = await user.save();
+        let { jwtToken, refreshToken } = await session.newSession({ "_id": saved._id, username, email }, "user");
+
+        res.status(200).json({ jwtToken, refreshToken });
     } catch (err) {
         next(User.checkForDuplicateEmail(err));
     }
