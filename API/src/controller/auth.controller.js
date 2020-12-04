@@ -14,9 +14,9 @@ exports.register = async(req, res, next) => {
         });
 
         const saved = await user.save();
-        const { jwtToken, refreshToken } = await session.newSession({ "_id": saved._id, username, email }, "user");
+        const { jwt, refreshToken } = await session.newSession({ "_id": saved._id, username, email }, "user");
 
-        res.status(200).json({ jwtToken, refreshToken });
+        res.status(200).json({ jwt, refreshToken });
     } catch (err) {
         next(User.checkForDuplicateEmail(err));
     }
@@ -27,13 +27,13 @@ exports.login = async(req, res, next) => {
         let { username, password } = req.body;
         const user = await User.findUser(username, password);
 
-        const { jwtToken, refreshToken } = await session.newSession({
+        const { jwt, refreshToken } = await session.newSession({
             "_id": user._id,
             "username": user.username,
             "email": user.email
         }, "user");
 
-        res.status(200).json({ jwtToken, refreshToken });
+        res.status(200).json({ jwt, refreshToken });
     } catch (err) {
         next(err);
     }
@@ -41,7 +41,9 @@ exports.login = async(req, res, next) => {
 
 exports.refresh = async(req, res, next) => {
     try {
-
+        const refreshToken = req.body.refreshToken;
+        const jwt = await session.refresh(refreshToken);
+        res.status(200).json({ jwt });
     } catch (err) {
         next(err);
     }
