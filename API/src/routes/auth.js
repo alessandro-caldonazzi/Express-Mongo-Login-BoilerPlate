@@ -17,7 +17,7 @@ var router = express.Router();
  * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
  * @apiSuccess (Created 201) {String}  token.refreshToken  Token to get a new accessToken
  *
- * @apiError (Bad Request 401)  ValidationError  Some parameters may contain invalid values
+ * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.post('/register', controller.register);
 
@@ -35,7 +35,7 @@ router.post('/register', controller.register);
  * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
  * @apiSuccess (Created 201) {String}  token.refreshToken  Token to get a new accessToken
  *
- * @apiError (Bad Request 401)  ValidationError  Some parameters may contain invalid values
+ * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.post('/login', controller.login);
 
