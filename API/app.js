@@ -12,7 +12,9 @@ var env = process.env.NODE_ENV || 'developent';
 
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://${process.env.D_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017/Platform?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, });
+mongoose.connect(`mongodb://${process.env.D_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017/Platform?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, }, function(err) {
+    if (err) throw err;
+});
 
 const session = require('session-jwt');
 session.settings(process.env.JWT_SECRET);
