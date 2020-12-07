@@ -11,7 +11,7 @@ services:
   - mongodb
 before_script:
   - sleep 1
-  - mongo Platform --eval 'db.createUser({user:"ale",pwd:"password",roles:["readWrite"]});'
+  - mongo admin --eval 'db.createUser({user:"ale",pwd:"password",roles:["readWrite"]});'
 script: npm test
 env: 
-  - MONGO_PASSWORD=password JWT_SECRET=segreto MONGO_IP=127.0.0.1
+  - MONGO_PASSWORD=password JWT_SECRET=segreto MONGO_IP=127.0.0.1 D_USER=
