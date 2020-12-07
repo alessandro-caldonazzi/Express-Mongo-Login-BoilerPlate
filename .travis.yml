@@ -10,7 +10,7 @@ cache:
 services:
   - mongodb
 before_script:
-  - sleep 15
+  - sleep 1
   - mongo admin --eval 'db.createUser({user:"ale",pwd:"password",roles:["readWrite"]});'
 script: npm test
 env: 
