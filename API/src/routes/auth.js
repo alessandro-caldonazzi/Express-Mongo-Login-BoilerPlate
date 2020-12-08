@@ -71,4 +71,17 @@ router.post('/refresh', validate(refresh), controller.refresh);
  */
 router.post('/send-reset-token', validate(resetTokenPassword), controller.resetTokenPassword);
 
+/**
+ * @api {get} auth/ssuccessful-google-login Google redirect user here after successful login
+ * @apiDescription Confirm login google
+ * @apiVersion 1.0.0
+ * @apiName Google login
+ * @apiGroup Auth
+ * @apiPermission public
+ *
+ * @apiParam  {String{6..128}}        email     User's email
+ *
+ * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
+ */
+router.get('/successful-google-login', controller.googleLogin);
 module.exports = router;
