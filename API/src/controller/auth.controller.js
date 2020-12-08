@@ -3,6 +3,8 @@ const APIError = require('../utils/apiError');
 const mongoose = require('mongoose');
 const session = require('session-jwt');
 const ResetTokenPassword = require('../models/resetTokenPassword.model');
+const emailProvider = require('../services/email/emailProvider');
+const httpStatus = require('http-status');
 
 exports.register = async(req, res, next) => {
     try {
@@ -57,8 +59,9 @@ exports.resetTokenPassword = async(req, res, next) => {
 
         if (user) {
             const token = await ResetTokenPassword.generate(user);
-            console.log(token);
-            return res.status(200).end();
+            emailProvider.sendPasswordReset(token, email);
+            res.status(httpStatus.OK);
+            return res.json('success');
         }
         throw new APIError({
             status: httpStatus.UNAUTHORIZED,
