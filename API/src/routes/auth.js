@@ -1,7 +1,7 @@
 var express = require('express');
 var controller = require('../controller/auth.controller');
 var router = express.Router();
-const { register, login, refresh } = require('../validator/auth.validator');
+const { register, login, refresh, resetTokenPassword } = require('../validator/auth.validator');
 const { validate } = require('express-validation');
 
 /**
@@ -34,8 +34,8 @@ router.post('/register', validate(register), controller.register);
  * @apiParam  {String{3..128}}          username     User's nikname
  * @apiParam  {String{6..128}}  password  User's password
  *
- * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
- * @apiSuccess (Created 201) {String}  token.refreshToken  Token to get a new accessToken
+ * @apiSuccess {String}  token.jwt   Authorization Token (Json Web Token)
+ * @apiSuccess {String}  token.refreshToken  Token to get a new accessToken
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
@@ -51,10 +51,24 @@ router.post('/login', validate(login), controller.login);
  *
  * @apiParam  {String{3..}}          refreshToken     refresh token
  *
- * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
+ * @apiSuccess {String}  token.jwt   Authorization Token (Json Web Token)
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.post('/refresh', validate(refresh), controller.refresh);
+
+/**
+ * @api {post} auth/send-reset-token Reset password
+ * @apiDescription Send token to reset password via email
+ * @apiVersion 1.0.0
+ * @apiName Reset Password Token
+ * @apiGroup Auth
+ * @apiPermission public
+ *
+ * @apiParam  {String{6..128}}        email     User's email
+ *
+ * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
+ */
+router.post('/send-reset-token', validate(resetTokenPassword), controller.resetTokenPassword);
 
 module.exports = router;
