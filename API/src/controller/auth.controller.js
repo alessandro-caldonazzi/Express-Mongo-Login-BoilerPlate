@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const APIError = require('../utils/apiError');
 const mongoose = require('mongoose');
 const session = require('session-jwt');
+const ResetTokenPassword = require('../models/resetTokenPassword.model');
 
 exports.register = async(req, res, next) => {
     try {
@@ -44,6 +45,25 @@ exports.refresh = async(req, res, next) => {
         const refreshToken = req.body.refreshToken;
         const jwt = await session.refresh(refreshToken);
         res.status(200).json({ jwt });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.resetTokenPassword = async(req, res, next) => {
+    try {
+        const email = req.body.email;
+        const user = await User.findOne({ email }).exec();
+
+        if (user) {
+            const token = await ResetTokenPassword.generate(user);
+            console.log(token);
+            return res.status(200).end();
+        }
+        throw new APIError({
+            status: httpStatus.UNAUTHORIZED,
+            message: 'Invalid email',
+        });
     } catch (err) {
         next(err);
     }
