@@ -35,7 +35,7 @@ exports.sendPasswordReset = async(resetTokenObj, address) => {
             },
             locals: {
                 productName: 'Express-mongo-login',
-                passwordResetUrl: resetTokenObj.resetToken,
+                passwordResetUrl: `https://YOUR_APP_URL/PATH_TO_RESET_PASSWORD_PAGE?resetToken=${resetTokenObj.resetToken}`,
             },
         })
         .catch((err) => console.log('error sending password reset email: ', err));
