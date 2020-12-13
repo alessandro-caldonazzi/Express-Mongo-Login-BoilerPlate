@@ -68,13 +68,23 @@ exports.resetTokenPassword = async(req, res, next) => {
             message: 'Invalid email',
         });
     } catch (err) {
+        console.log(err);
         next(err);
     }
 };
 
+/*
+endpoint where google send <code> when user login, to do this you need to build a link like this
+https://accounts.google.com/o/oauth2/v2/auth?client_id=<YOUR_CLIENT_ID>&redirect_uri=http://<HOST_NAME_OF_THIS_API>:3000/auth/successful-google-login?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code
+
+when user visits this link and make a successful login, you will get a code here. 
+REED GOOGLE DOCS TO PROCEED
+*/
 exports.googleLogin = async(req, res, next) => {
     try {
-        console.log(req.body);
+        let code = req.query.code;
+        //do what you want with google code 
+        res.json({});
     } catch (err) {
         next(err);
     }

@@ -38,5 +38,5 @@ exports.sendPasswordReset = async(resetTokenObj, address) => {
                 passwordResetUrl: resetTokenObj.resetToken,
             },
         })
-        .catch(() => console.log('error sending password reset email'));
+        .catch((err) => console.log('error sending password reset email: ', err));
 };
