@@ -37,8 +37,8 @@ POST auth/register
 
 | Name     | Type       | Description                           |
 |----------|------------|---------------------------------------|
-| token.jwt | `String` | <p>Authorization Token (Json Web Token)</p> |
-| token.refreshToken | `String` | <p>Token to get a new accessToken</p> |
+| jwt | `String` | <p>Authorization Token (Json Web Token)</p> |
+| refreshToken | `String` | <p>Token to get a new accessToken</p> |
 
 ### Error response
 
@@ -70,8 +70,8 @@ POST auth/login
 
 | Name     | Type       | Description                           |
 |----------|------------|---------------------------------------|
-| token.jwt | `String` | <p>Authorization Token (Json Web Token)</p> |
-| token.refreshToken | `String` | <p>Token to get a new accessToken</p> |
+| jwt | `String` | <p>Authorization Token (Json Web Token)</p> |
+| refreshToken | `String` | <p>Token to get a new accessToken</p> |
 
 ### Error response
 
@@ -102,7 +102,7 @@ POST auth/refresh
 
 | Name     | Type       | Description                           |
 |----------|------------|---------------------------------------|
-| token.jwt | `String` | <p>Authorization Token (Json Web Token)</p> |
+| jwt | `String` | <p>Authorization Token (Json Web Token)</p> |
 
 ### Error response
 
