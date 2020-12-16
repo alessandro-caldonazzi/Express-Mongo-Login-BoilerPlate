@@ -11,7 +11,7 @@ const resetPasswordSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    createdAt: { type: Date, default: Date.now, expires: 60 }
+    createdAt: { type: Date, default: Date.now, expires: 60 * 60 * 2 }
 });
 
 resetPasswordSchema.statics = {
