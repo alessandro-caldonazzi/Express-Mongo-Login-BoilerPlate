@@ -141,7 +141,7 @@ POST auth/send-reset-token
 <p>Confirm login google</p>
 
 ```
-GET auth/ssuccessful-google-login
+GET auth/successful-google-login
 ```
 
 ### Parameters - `Parameter`
