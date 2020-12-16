@@ -17,7 +17,7 @@ const resetPasswordSchema = new mongoose.Schema({
 resetPasswordSchema.statics = {
     async generate(user) {
         const userId = user._id;
-        const resetToken = `${userId}.${crypto.randomBytes(40).toString('hex')}`;
+        const resetToken = crypto.randomBytes(4).toString('hex');
         const resetTokenObj = new ResetTokenPassword({
             resetToken,
             userId,
