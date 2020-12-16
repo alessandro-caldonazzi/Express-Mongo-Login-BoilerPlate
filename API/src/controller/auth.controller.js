@@ -73,6 +73,27 @@ exports.resetTokenPassword = async(req, res, next) => {
     }
 };
 
+exports.changePassword = async(req, res, next) => {
+    try {
+        const { token, newPassword } = req.body;
+        const tokenObj = await ResetTokenPassword.findOneAndRemove({ resetToken: token }).populate('userId').exec();
+
+        if (tokenObj) {
+            const user = tokenObj.userId;
+            user.password = newPassword;
+            user.save();
+            return res.status(httpStatus.OK).json("success");
+        }
+        throw new APIError({
+            status: httpStatus.UNAUTHORIZED,
+            isPublic: true,
+            message: "Invalid reset token"
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
 /*
 endpoint where google send <code> when user login, to do this you need to build a link like this
 https://accounts.google.com/o/oauth2/v2/auth?client_id=<YOUR_CLIENT_ID>&redirect_uri=http://<HOST_NAME_OF_THIS_API>:3000/auth/successful-google-login?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code
