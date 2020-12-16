@@ -72,7 +72,7 @@ router.post('/refresh', validate(refresh), controller.refresh);
 router.post('/send-reset-token', validate(resetTokenPassword), controller.resetTokenPassword);
 
 /**
- * @api {get} auth/ssuccessful-google-login Google redirect user here after successful login
+ * @api {get} auth/successful-google-login Google redirect user here after successful login
  * @apiDescription Confirm login google
  * @apiVersion 1.0.0
  * @apiName Google login
