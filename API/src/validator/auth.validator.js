@@ -42,4 +42,15 @@ module.exports = {
                 .required(),
         }),
     },
+
+    changePassword: {
+        body: Joi.object({
+            newPassword: Joi.string()
+                .required()
+                .max(128),
+            token: Joi.string()
+                .required()
+                .min(8).max(8)
+        }),
+    },
 };
