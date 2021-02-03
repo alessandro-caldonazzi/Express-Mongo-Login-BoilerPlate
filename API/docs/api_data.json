@@ -1,7 +1,7 @@
 [
   {
     "type": "get",
-    "url": "auth/ssuccessful-google-login",
+    "url": "auth/successful-google-login",
     "title": "Google redirect user here after successful login",
     "description": "<p>Confirm login google</p>",
     "version": "1.0.0",
@@ -83,14 +83,14 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "token.jwt",
+            "field": "jwt",
             "description": "<p>Authorization Token (Json Web Token)</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "token.refreshToken",
+            "field": "refreshToken",
             "description": "<p>Token to get a new accessToken</p>"
           }
         ]
@@ -145,7 +145,7 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "token.jwt",
+            "field": "jwt",
             "description": "<p>Authorization Token (Json Web Token)</p>"
           }
         ]
@@ -216,14 +216,14 @@
             "group": "Created 201",
             "type": "String",
             "optional": false,
-            "field": "token.jwt",
+            "field": "jwt",
             "description": "<p>Authorization Token (Json Web Token)</p>"
           },
           {
             "group": "Created 201",
             "type": "String",
             "optional": false,
-            "field": "token.refreshToken",
+            "field": "refreshToken",
             "description": "<p>Token to get a new accessToken</p>"
           }
         ]
@@ -246,8 +246,58 @@
   },
   {
     "type": "post",
+    "url": "auth/change-password",
+    "title": "Reset password step 2",
+    "description": "<p>Change password with new password if token is valid</p>",
+    "version": "1.0.0",
+    "name": "Reset_Password",
+    "group": "Auth",
+    "permission": [
+      {
+        "name": "public"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "size": "6..128",
+            "optional": false,
+            "field": "newPassword",
+            "description": "<p>New user password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "size": "8",
+            "optional": false,
+            "field": "token",
+            "description": "<p>reset token received via email</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Bad Request 400": [
+          {
+            "group": "Bad Request 400",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Some parameters may contain invalid values</p>"
+          }
+        ]
+      }
+    },
+    "filename": "API/src/routes/auth.js",
+    "groupTitle": "Auth"
+  },
+  {
+    "type": "post",
     "url": "auth/send-reset-token",
-    "title": "Reset password",
+    "title": "Reset password step 1",
     "description": "<p>Send token to reset password via email</p>",
     "version": "1.0.0",
     "name": "Reset_Password_Token",
