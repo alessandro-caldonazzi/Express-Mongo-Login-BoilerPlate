@@ -19,7 +19,7 @@ exports.register = async(req, res, next) => {
         const saved = await user.save();
         const { jwt, refreshToken } = await session.newSession({ "_id": saved._id, username, email }, "user");
 
-        res.status(200).json({ jwt, refreshToken });
+        res.status(httpStatus.CREATED).json({ jwt, refreshToken });
     } catch (err) {
         next(User.checkForDuplicateEmail(err));
     }
@@ -36,7 +36,7 @@ exports.login = async(req, res, next) => {
             "email": user.email
         }, "user");
 
-        res.status(200).json({ jwt, refreshToken });
+        res.status(httpStatus.OK).json({ jwt, refreshToken });
     } catch (err) {
         next(err);
     }
@@ -46,7 +46,7 @@ exports.refresh = async(req, res, next) => {
     try {
         const refreshToken = req.body.refreshToken;
         const jwt = await session.refresh(refreshToken);
-        res.status(200).json({ jwt });
+        res.status(httpStatus.OK).json({ jwt });
     } catch (err) {
         next(err);
     }
