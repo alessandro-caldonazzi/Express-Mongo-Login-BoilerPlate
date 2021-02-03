@@ -64,7 +64,7 @@ exports.resetTokenPassword = async(req, res, next) => {
             return res.json('success');
         }
         throw new APIError({
-            status: httpStatus.UNAUTHORIZED,
+            statusCode: httpStatus.UNAUTHORIZED,
             message: 'Invalid email',
         });
     } catch (err) {
@@ -85,7 +85,7 @@ exports.changePassword = async(req, res, next) => {
             return res.status(httpStatus.OK).json("success");
         }
         throw new APIError({
-            status: httpStatus.UNAUTHORIZED,
+            statusCode: httpStatus.UNAUTHORIZED,
             isPublic: true,
             message: "Invalid reset token"
         });

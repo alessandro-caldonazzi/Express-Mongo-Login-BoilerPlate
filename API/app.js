@@ -4,13 +4,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const httpStatus = require('http-status');
-
 const indexRouter = require('./src/routes/index');
 const usersRouter = require('./src/routes/users');
 const authRouter = require('./src/routes/auth');
 const env = process.env.NODE_ENV || 'developent';
 const helmet = require('helmet');
-
 const mongoose = require('mongoose');
 
 mongoose.connect(`mongodb://${process.env.D_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017/Platform?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }, function(err) {
@@ -46,8 +44,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use((err, req, res, next) => {
     const response = {
-        code: err.status || 400,
-        message: err.message || httpStatus[response.code],
+        code: err.statusCode || 500,
+        message: err.message || httpStatus['500_MESSAGE'],
         errors: err.errors,
         stack: err.stack,
     };
