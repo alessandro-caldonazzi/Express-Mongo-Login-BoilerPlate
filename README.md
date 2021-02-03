@@ -1,4 +1,4 @@
 # Express login mongodb template - WIP - [![Build Status](https://travis-ci.com/alessandro-caldonazzi/Express-Mongo-Login-BoilerPlate.svg?branch=main)](https://travis-ci.com/alessandro-caldonazzi/Express-Mongo-Login-BoilerPlate)
 
-## Complete express boilerPlate 
-[Read DOCS](docs.md)
+## A template for your node mongoDB based API 
+[Read DOCS](https://alessandro-caldonazzi.github.io/Express-Mongo-Login-BoilerPlate/)
