@@ -1,15 +1,21 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../bin/www');
+const mongoose = require('mongoose');
 
 chai.use(chaiHttp);
 chai.should();
 let should = chai.should();
 
+//connect to mongoDb and drop collections
+mongoose.connect(`mongodb://${process.env.D_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017/Platform?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }, function(err) {
+    if (err) throw err;
+});
 
+mongoose.connection.collections['users'].drop();
+mongoose.connection.collections['resettokenpasswords'].drop();
 
 describe('test', () => {
-
     let jwt, refreshToken;
     step('registro utente valido', async(done) => {
         chai.request(server)
