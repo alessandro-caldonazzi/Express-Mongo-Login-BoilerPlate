@@ -12,12 +12,12 @@ const { validate } = require('express-validation');
  * @apiGroup Auth
  * @apiPermission public
  *
- * @apiParam  {String{3..128}}          username     User's nikname
- * @apiParam  {String{6..128}}        email     User's email
- * @apiParam  {String{6..128}}  password  User's password
+ * @apiParam  {String{3..128}}  username    User's nikname
+ * @apiParam  {String{6..128}}  email       User's email
+ * @apiParam  {String{6..128}}  password    User's password
  *
- * @apiSuccess (Created 201) {String}  token.jwt   Authorization Token (Json Web Token)
- * @apiSuccess (Created 201) {String}  token.refreshToken  Token to get a new accessToken
+ * @apiSuccess (Created 201) {String}  jwt   Authorization Token (Json Web Token)
+ * @apiSuccess (Created 201) {String}  refreshToken  Token to get a new accessToken
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
@@ -31,11 +31,11 @@ router.post('/register', validate(register), controller.register);
  * @apiGroup Auth
  * @apiPermission public
  *
- * @apiParam  {String{3..128}}          username     User's nikname
- * @apiParam  {String{6..128}}  password  User's password
+ * @apiParam  {String{3..128}}  username    User's nikname
+ * @apiParam  {String{6..128}}  password    User's password
  *
- * @apiSuccess {String}  token.jwt   Authorization Token (Json Web Token)
- * @apiSuccess {String}  token.refreshToken  Token to get a new accessToken
+ * @apiSuccess {String}  jwt   Authorization Token (Json Web Token)
+ * @apiSuccess {String}  refreshToken  Token to get a new accessToken
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
@@ -51,7 +51,7 @@ router.post('/login', validate(login), controller.login);
  *
  * @apiParam  {String{3..}}          refreshToken     refresh token
  *
- * @apiSuccess {String}  token.jwt   Authorization Token (Json Web Token)
+ * @apiSuccess {String}  jwt   Authorization Token (Json Web Token)
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
@@ -80,7 +80,7 @@ router.post('/send-reset-token', validate(resetTokenPassword), controller.resetT
  * @apiPermission public
  *
  * @apiParam  {String{6..128}}        newPassword     New user password
- * @apiParam  {String{5}}        token     reset token received via email
+ * @apiParam  {String{8}}        token     reset token received via email
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */

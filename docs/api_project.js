@@ -1,0 +1,27 @@
+define({
+  "name": "Express mongo login boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate for your node API",
+  "title": "A boilerplate for your node API",
+  "url": "/",
+  "order": [
+    "Register",
+    "Login",
+    "Refresh",
+    "Reset password step 1",
+    "Reset password step 2",
+    "Auth - Login",
+    "Define",
+    "PostTitleAndError",
+    "PostError"
+  ],
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2021-02-03T19:21:34.378Z",
+    "url": "https://apidocjs.com",
+    "version": "0.25.0"
+  }
+});

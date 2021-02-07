@@ -16,7 +16,7 @@ describe('test', () => {
             .post('/auth/register')
             .send({ 'email': 'email@example.com', 'password': 'password', 'username': 'username' })
             .end((err, res) => {
-                res.should.have.status(200);
+                res.should.have.status(201);
                 res.body.should.have.property('jwt');
                 res.body.should.have.property('refreshToken');
                 jwt = res.body.jwt;
